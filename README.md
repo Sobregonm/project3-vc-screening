@@ -58,6 +58,14 @@ and a source reference for each lookup.
 The graph uses a sample startup for this check. The API calls and report
 generation still need to be connected to the graph.
 
+## First automated screening report
+
+I ran `python main.py` for Kalipso. The workflow collected public
+sources and saved the first draft to `reports/kalipso-screening.md`.
+The report cites the company website and marks missing information
+as “Not verified”. Automatic assessment against the fund’s criteria
+is still pending.
+
 ## Future go-to-market sprints
 
 1. **Pilot the report with one VC team**
