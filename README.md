@@ -44,7 +44,19 @@ flowchart TD
     G --> H["Save the Markdown file"]
 ```
 
-The fund's criteria guide the assessment. The method for retrieving supporting context is still to be decided.
+## Grounding and graph check
+
+The project looks up investment rules by ID in
+`knowledge/investment_thesis.json`. This gives the graph a clear rule
+and a source reference for each lookup.
+
+- `python retrieval.py geography` returned the rule and its source reference.
+- `python retrieval.py revenue` reported that the criterion was unknown.
+- `python main.py` ran all four steps in order. The assessment step received
+  the geography rule and its source from the previous step.
+
+The graph uses a sample startup for this check. The API calls and report
+generation still need to be connected to the graph.
 
 ## Future go-to-market sprints
 

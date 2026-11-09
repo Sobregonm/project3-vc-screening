@@ -1,0 +1,11 @@
+{
+  "fund": "Puente Ventures",
+  "criteria": {
+    "business_model": "The startup must sell to businesses and help automate business workflows. Any B2B model is eligible.",
+    "sector": "Eligible sectors are Fintech, Legaltech, Logtech, and Proptech.",
+    "geography": "The startup must be headquartered in Spain, Italy, Portugal, Mexico, Colombia, Chile, or Peru.",
+    "expansion": "Potential to expand between Southern Europe and Latin America is preferred.",
+    "stage": "The startup must be at the Pre-Seed or Seed stage, with a working MVP and early signs of traction, such as active users or pilots.",
+    "exclusions": "Excluded activities include purely B2C business models, hardware, biotechnology, pure crypto or Web3, gambling, tobacco, and cannabis."
+  }
+}
