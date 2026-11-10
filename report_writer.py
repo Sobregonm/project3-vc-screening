@@ -59,6 +59,34 @@ def write_report(state: dict) -> Path:
     lines += ["", "## 3. Fit with the fund's criteria", ""]
     for criterion_id in CRITERIA:
         criterion = retrieve_criterion(criterion_id)
+
+        result = state.get("geography_assessment")
+        if criterion_id == "geography" and result:
+            lines.append(
+                f"- **Geography — {result['status']}.** {result['reason']}"
+            )
+            lines.append(f"  - Fund rule: {criterion['rule']}")
+            for claim in result["claims"]:
+                lines.append(
+                    f"  - [{claim['source']}]({claim['source']})"
+                    f" — “{claim['quote']}”"
+                )
+            continue
+
+        funding = state.get("funding_assessment")
+        if criterion_id == "stage" and funding:
+            lines.append(
+                f"- **Funding stage — {funding['status']}.** {funding['reason']}"
+            )
+            for claim in funding["claims"]:
+                lines.append(
+                    f"  - [{claim['source']}]({claim['source']})"
+                    f" — “{claim['quote']}”"
+                )
+            lines.append("  - Full stage criterion: Not verified. "
+                         "Product readiness and traction still need a separate check.")
+            continue
+
         lines += [
             f"- **{criterion_id.replace('_', ' ').title()} — Not verified.** "
             f"{criterion['rule']} ([fund rule]({criterion['source']}))",

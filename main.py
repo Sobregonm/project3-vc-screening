@@ -9,6 +9,10 @@ from jina_reader import read_page
 from gdelt_news import search_news
 from report_writer import write_report
 
+from assessment import assess_geography
+from assessment import assess_funding_stage 
+from headquarters_extractor import extract_company_evidence
+
 class ScreeningState(TypedDict):
     startup_name: str
     website: str
@@ -19,7 +23,9 @@ class ScreeningState(TypedDict):
     page_read_error: NotRequired[str]
     news: NotRequired[list[dict[str, str]]]
     news_error: NotRequired[str]
-    report_path: NotRequired[str]    
+    report_path: NotRequired[str]
+    geography_assessment: NotRequired[dict]
+    funding_assessment: NotRequired[dict]    
 
 
 def collect_sources(state: ScreeningState) -> dict:
@@ -60,11 +66,39 @@ def retrieve_criteria(state: ScreeningState) -> dict:
 
 
 def assess_fit(state: ScreeningState) -> dict:
-    criterion = state["geography_criterion"]
-    print(f"3. Assess fit with criterion: {criterion['criterion']}")
-    print(f"   Rule: {criterion['rule']}")
-    print(f"   Source: {criterion['source']}")
-    return {}
+    print("3. Assess fit with criterion: geography")
+
+    rule = state["geography_criterion"]["rule"]
+    country_list = rule.removeprefix("The startup must be headquartered in ")
+    allowed = [
+        country.strip()
+        for country in country_list.rstrip(".").replace(", or ", ", ").split(",")
+    ]
+
+    try:
+        evidence = extract_company_evidence(state.get("sources", []))
+        claims = evidence["headquarters"]
+        result = assess_geography(claims, allowed)
+        result["claims"] = claims
+        funding = assess_funding_stage(evidence["funding"])
+        if evidence["rejected_funding_count"]:
+            funding["status"] = "Not verified"
+            funding["reason"] = (
+                "Some funding claims could not be matched to their source text. "
+                "Review the original sources before confirming the funding stage."
+            )
+
+    except RuntimeError as error:
+        result = {
+            "status": "Not verified",
+            "reason": str(error),
+            "claims": [],
+        }
+        funding = {"status": "Not verified", "reason": str(error), "claims": []}
+
+    print(f"   {result['status']} | {result['reason']}")
+    print(f"   Funding stage: {funding['status']} | {funding['reason']}")
+    return {"geography_assessment": result, "funding_assessment": funding}
 
 
 def prepare_report(state: ScreeningState) -> dict:

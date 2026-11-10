@@ -66,6 +66,29 @@ The report cites the company website and marks missing information
 as “Not verified”. Automatic assessment against the fund’s criteria
 is still pending.
 
+### Geography check
+
+The geography rule returned `Meets` for Kalipso. Spain is on the fund's
+list of eligible headquarters countries. For this test, I manually
+identified Spain from the [company announcement](https://kalipso.ai/blog/weve-raised-3-2m).
+Automatic extraction is still pending.
+
+### Automated geography check and error handling
+
+The workflow found evidence that Kalipso is based in Spain and marked
+the geography criterion as `Meets`. The report includes the quote and
+its source.
+
+GDELT returned HTTP 429 after one retry. The workflow still saved the
+report and marked recent news as `Not verified`.
+
+## Funding-stage conflict test. 
+
+I tested the extractor with two saved source snippets. It found both labels, Seed and Series A, and validated both quotes. The assessment returned Not verified because the sources gave different labels.
+
+## Funding-stage validation. 
+The model returned three Seed claims, but only one quote matched its source text. The workflow kept the valid quote, marked the funding stage as Not verified, and saved the report.
+
 ## Future go-to-market sprints
 
 1. **Pilot the report with one VC team**

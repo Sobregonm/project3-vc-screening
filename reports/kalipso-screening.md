@@ -18,9 +18,16 @@ Revenue model: Not verified.
 
 - **Business Model — Not verified.** The startup must sell to businesses and help automate business workflows. Any B2B model is eligible. ([fund rule](knowledge/investment_thesis.json#criteria/business_model))
 - **Sector — Not verified.** Eligible sectors are Fintech, Legaltech, Logtech, and Proptech. ([fund rule](knowledge/investment_thesis.json#criteria/sector))
-- **Geography — Not verified.** The startup must be headquartered in Spain, Italy, Portugal, Mexico, Colombia, Chile, or Peru. ([fund rule](knowledge/investment_thesis.json#criteria/geography))
+- **Geography — Meets.** Spain is on the fund's list of eligible headquarters countries.
+  - Fund rule: The startup must be headquartered in Spain, Italy, Portugal, Mexico, Colombia, Chile, or Peru.
+  - [https://www.linkedin.com/posts/vestorraise_vestorraise-kalipso-spaintech-activity-7517867115266375681-XL5w](https://www.linkedin.com/posts/vestorraise_vestorraise-kalipso-spaintech-activity-7517867115266375681-XL5w) — “Headquartered in Barcelona, Kalipso is building a unified regulatory operations platform designed to help organizations navigate an increasingly complex compliance landscape.”
+  - [https://www.thesaasnews.com/news/kalipso-raises-3-2m-seed](https://www.thesaasnews.com/news/kalipso-raises-3-2m-seed) — “Kalipso, a Barcelona-based AI-driven regulatory technology startup, has secured $3.2 million in seed funding.”
+  - [https://www.corporatecomplianceinsights.com/kalipso-raises-seed-round](https://www.corporatecomplianceinsights.com/kalipso-raises-seed-round) — “Kalipso has raised $3.2 million in seed funding as it expands across European markets, the Barcelona-based regtech provider said.”
+  - [https://tavily.com/knowledge/company/eoGMKtopf7xl](https://tavily.com/knowledge/company/eoGMKtopf7xl) — “Headquarters: Barcelona, Spain”
 - **Expansion — Not verified.** Potential to expand between Southern Europe and Latin America is preferred. ([fund rule](knowledge/investment_thesis.json#criteria/expansion))
-- **Stage — Not verified.** The startup must be at the Pre-Seed or Seed stage, with a working MVP and early signs of traction, such as active users or pilots. ([fund rule](knowledge/investment_thesis.json#criteria/stage))
+- **Funding stage — Not verified.** Some funding claims could not be matched to their source text. Review the original sources before confirming the funding stage.
+  - [https://www.linkedin.com/posts/vestorraise_vestorraise-kalipso-spaintech-activity-7517867115266375681-XL5w](https://www.linkedin.com/posts/vestorraise_vestorraise-kalipso-spaintech-activity-7517867115266375681-XL5w) — “Stage: Seed”
+  - Full stage criterion: Not verified. Product readiness and traction still need a separate check.
 - **Exclusions — Not verified.** Excluded activities include purely B2C business models, hardware, biotechnology, pure crypto or Web3, gambling, tobacco, and cannabis. ([fund rule](knowledge/investment_thesis.json#criteria/exclusions))
 
 ## 4. Technology and founders
@@ -44,8 +51,8 @@ Recent news: Not verified.
 ## 7. Sources
 
 - [Official company website](https://kalipso.ai/) — company description.
+- [Kalipso AI Compliance Platform Raises $3.2M in Spain | Vestor Raise posted on the topic | LinkedIn](https://www.linkedin.com/posts/vestorraise_vestorraise-kalipso-spaintech-activity-7517867115266375681-XL5w) — search result to review.
 - [Kalipso Raises $3.2M Seed](https://www.thesaasnews.com/news/kalipso-raises-3-2m-seed) — search result to review.
 - [Kalipso Raises $3.2M Seed Round | Corporate Compliance Insights](https://www.corporatecomplianceinsights.com/kalipso-raises-seed-round) — search result to review.
+- [Kalipso](https://tavily.com/knowledge/company/eoGMKtopf7xl) — search result to review.
 - [Kalipso - 2026 Company Profile, Funding & Competitors - Tracxn](https://tracxn.com/d/companies/kalipso/__MOjcXDtoimIucssAkhgJ1rQY-gavFWkgGRoJYRSJpho) — search result to review.
-- [We've raised $3.2M to revolutionise regulatory compliance. | Kalipso Blog](https://kalipso.ai/blog/weve-raised-3-2m) — search result to review.
-- [AI-Powered Regulatory Compliance Software | Kalipso](https://kalipso.ai) — search result to review.
