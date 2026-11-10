@@ -1,5 +1,6 @@
 #from typing import TypedDict
 from typing import NotRequired, TypedDict
+import argparse
 
 from langgraph.graph import END, START, StateGraph
 from retrieval import retrieve_criterion
@@ -76,7 +77,9 @@ def assess_fit(state: ScreeningState) -> dict:
     ]
 
     try:
-        evidence = extract_company_evidence(state.get("sources", []))
+        evidence = extract_company_evidence(
+            state["startup_name"], state.get("sources", [])
+        )
         claims = evidence["headquarters"]
         result = assess_geography(claims, allowed)
         result["claims"] = claims
@@ -123,7 +126,12 @@ builder.add_edge("prepare_report", END)
 graph = builder.compile()
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Generate a startup screening report.")
+    parser.add_argument("startup_name", help="Name of the startup")
+    parser.add_argument("website", help="Official website URL")
+    args = parser.parse_args()
+
     graph.invoke({
-        "startup_name": "Kalipso",
-        "website": "https://kalipso.ai/",
+        "startup_name": args.startup_name,
+        "website": args.website,
     })

@@ -14,11 +14,11 @@ I chose LangGraph because startup screening requires me to keep track of finding
 
 | API | Purpose | Observed result |
 |---|---|---|
-| Tavily Search | Find public sources about startups and competitors. | HTTP 200 and three links with general Legaltech context. A search for a specific startup is still pending. |
+| Tavily Search | Find public sources about startups and competitors. | HTTP 200 and three links with general Legaltech context. Later workflow runs found five sources each for Kalipso and Lawra. |
 | Jina Reader | Extract readable text from public pages. | HTTP 200 and readable text about digital signatures and contract management from a company website. |
 | GDELT DOC API | Find recent news about the startup or its sector. | HTTP 200 and five articles in JSON. Some titles were relevant to Legaltech. Earlier attempts returned HTTP 429. |
 
-These tests ran separately. The complete workflow still needs to be implemented and tested. If GDELT remains rate-limited after one retry, the report can use the available sources and mark the news section as not verified.
+I first tested these APIs separately. Later, the complete workflow generated reports for Kalipso and Lawra. When GDELT returned HTTP 429 after one retry, the workflow still saved the report and marked recent news as Not verified.
 
 ## Report template
 
@@ -55,23 +55,20 @@ and a source reference for each lookup.
 - `python main.py` ran all four steps in order. The assessment step received
   the geography rule and its source from the previous step.
 
-The graph uses a sample startup for this check. The API calls and report
-generation still need to be connected to the graph.
-
 ## First automated screening report
 
 I ran `python main.py` for Kalipso. The workflow collected public
 sources and saved the first draft to `reports/kalipso-screening.md`.
 The report cites the company website and marks missing information
 as “Not verified”. Automatic assessment against the fund’s criteria
-is still pending.
+was still pending at that poin.
 
 ### Geography check
 
 The geography rule returned `Meets` for Kalipso. Spain is on the fund's
 list of eligible headquarters countries. For this test, I manually
 identified Spain from the [company announcement](https://kalipso.ai/blog/weve-raised-3-2m).
-Automatic extraction is still pending.
+Automatic extraction was still pending at that poin.
 
 ### Automated geography check and error handling
 
@@ -86,8 +83,10 @@ report and marked recent news as `Not verified`.
 
 I tested the extractor with two saved source snippets. It found both labels, Seed and Series A, and validated both quotes. The assessment returned Not verified because the sources gave different labels.
 
-## Funding-stage validation. 
-The model returned three Seed claims, but only one quote matched its source text. The workflow kept the valid quote, marked the funding stage as Not verified, and saved the report.
+## Funding-stage validation 
+- In a controlled test, the workflow accepted a quote that says Kalipso secured Seed funding. The funding-stage result was `Meets`.
+- In a controlled test for Lawra, the workflow excluded an open Seed round, a future Series A milestone, and a funding round from another company. The funding-stage result was `Not verified`.
+- Both saved reports show `Not verified` for funding stage. Neither report includes a funding-stage quote.
 
 ## Future go-to-market sprints
 
@@ -100,3 +99,17 @@ The model returned three Seed claims, but only one quote matched its source text
 - Copy `.env.example` to `.env` and add your Tavily key to `TAVILY_API_KEY`.
 - The Jina Reader and GDELT tests used public access without API keys.
 - Keep `.env` local. Git ignores it. The `.env.example` file contains variable names with empty values.
+
+## How to run
+
+From the project folder, run the workflow with the startup name and its official website:
+
+```bash
+python main.py "Kalipso" "https://kalipso.ai/"
+python main.py "Lawra" "https://lawra.io/"
+```
+
+The workflow saves a separate report for each startup:
+
+- [Kalipso screening report](reports/kalipso-screening.md)
+- [Lawra screening report](reports/lawra-screening.md)

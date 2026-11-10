@@ -23,10 +23,8 @@ Revenue model: Not verified.
   - [https://www.linkedin.com/posts/vestorraise_vestorraise-kalipso-spaintech-activity-7517867115266375681-XL5w](https://www.linkedin.com/posts/vestorraise_vestorraise-kalipso-spaintech-activity-7517867115266375681-XL5w) — “Headquartered in Barcelona, Kalipso is building a unified regulatory operations platform designed to help organizations navigate an increasingly complex compliance landscape.”
   - [https://www.thesaasnews.com/news/kalipso-raises-3-2m-seed](https://www.thesaasnews.com/news/kalipso-raises-3-2m-seed) — “Kalipso, a Barcelona-based AI-driven regulatory technology startup, has secured $3.2 million in seed funding.”
   - [https://www.corporatecomplianceinsights.com/kalipso-raises-seed-round](https://www.corporatecomplianceinsights.com/kalipso-raises-seed-round) — “Kalipso has raised $3.2 million in seed funding as it expands across European markets, the Barcelona-based regtech provider said.”
-  - [https://tavily.com/knowledge/company/eoGMKtopf7xl](https://tavily.com/knowledge/company/eoGMKtopf7xl) — “Headquarters: Barcelona, Spain”
 - **Expansion — Not verified.** Potential to expand between Southern Europe and Latin America is preferred. ([fund rule](knowledge/investment_thesis.json#criteria/expansion))
 - **Funding stage — Not verified.** Some funding claims could not be matched to their source text. Review the original sources before confirming the funding stage.
-  - [https://www.linkedin.com/posts/vestorraise_vestorraise-kalipso-spaintech-activity-7517867115266375681-XL5w](https://www.linkedin.com/posts/vestorraise_vestorraise-kalipso-spaintech-activity-7517867115266375681-XL5w) — “Stage: Seed”
   - Full stage criterion: Not verified. Product readiness and traction still need a separate check.
 - **Exclusions — Not verified.** Excluded activities include purely B2C business models, hardware, biotechnology, pure crypto or Web3, gambling, tobacco, and cannabis. ([fund rule](knowledge/investment_thesis.json#criteria/exclusions))
 

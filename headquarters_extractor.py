@@ -1,4 +1,5 @@
 import json
+import re
 from pathlib import Path
 
 from dotenv import dotenv_values
@@ -27,7 +28,9 @@ def normalize(text: str) -> str:
     return " ".join(text.split())
 
 
-def extract_company_evidence(sources: list[dict[str, str]]) -> dict:
+def extract_company_evidence(
+    startup_name: str, sources: list[dict[str, str]]
+) -> dict:
     snippets = {
         item["url"]: item["snippet"][:3000]
         for item in sources
@@ -63,16 +66,30 @@ def extract_company_evidence(sources: list[dict[str, str]]) -> dict:
                 "Use English country names. "
                 "Also extract funding-stage claims for the target company. "
                 "Use explicit labels such as Pre-Seed, Seed, or Series A. "
-                "Copy a quote that includes the stage label and keep its exact URL. "
+                "Copy the complete sentence that reports the completed round, "
+                "exactly as it appears in the snippet. The same sentence must "
+                "name target_company as the company that raised the funding "
+                "and include the stage label. Keep the exact source URL. "
+                "If no sentence meets these conditions, omit the claim. "
                 "Review each snippet separately. Extract every explicit funding "
                 "stage label for the target company, with its source and an exact "
                 "quote. Keep claims from different sources even when dates differ "
                 "or labels conflict. Leave the choice of the latest round to "
                 "the assessment step. Do not infer a stage "
                 "from the amount raised. Return an empty funding_claims list "
-                "if no snippet explicitly labels the round."                
+                "if no snippet explicitly labels the round."  
+                "Include a funding-stage claim only if the quote explicitly "
+                "states that the target company raised, secured, or closed "
+                "a round with that stage label. "
+                "Exclude open rounds, fundraising plans, future milestones, "
+                "triggers, projections, and rounds involving other companies. "
+                "A Series A trigger is a future milestone. "
+                "A page title that says Seed Round does not prove it closed. "                              
             ),
-            input=json.dumps(snippets, ensure_ascii=False),
+            input=json.dumps(
+                {"target_company": startup_name, "source_snippets": snippets},
+                ensure_ascii=False,
+            ),
             text_format=HeadquartersExtraction,
         )
     except (OpenAIError, ValueError) as error:
@@ -92,7 +109,26 @@ def extract_company_evidence(sources: list[dict[str, str]]) -> dict:
         ]
 
     parsed = response.output_parsed
-    funding = verified_claims(parsed.funding_claims)
+    target_pattern = re.compile(
+        rf"(?<!\w){re.escape(normalize(startup_name))}(?!\w)",
+        re.IGNORECASE,
+    )
+    def quote_contains_stage(claim: dict[str, str]) -> bool:
+        stage = normalize(claim["stage"]).lower()
+        quote = normalize(claim["quote"]).lower()
+        if not stage:
+            return False
+
+        # Check "pre-seed" and "pre seed" consistently.
+        stage = normalize(stage.replace("-", " ")).replace("pre seed", "preseed")
+        quote = normalize(quote.replace("-", " ")).replace("pre seed", "preseed")
+        return bool(re.search(rf"(?<!\w){re.escape(stage)}(?!\w)", quote))
+    funding = [
+        claim
+        for claim in verified_claims(parsed.funding_claims)
+        if target_pattern.search(normalize(claim["quote"]))
+        and quote_contains_stage(claim)
+    ]
     return {
         "headquarters": verified_claims(parsed.claims),
         "funding": funding,
