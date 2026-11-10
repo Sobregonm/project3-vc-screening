@@ -92,6 +92,7 @@ I tested the extractor with two saved source snippets. It found both labels, See
 
 1. **Pilot the report with one VC team**
 2. **Reach three more VC teams through accelerator referrals**
+[Read the full go-to-market sprint plan](gtm_future_sprints.md)
 
 ## Local setup
 
