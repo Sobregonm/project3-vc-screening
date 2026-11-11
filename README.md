@@ -8,7 +8,7 @@ The report checks the startup against the investment criteria of Puente Ventures
 
 ## Why LangGraph
 
-I chose LangGraph because startup screening requires me to keep track of findings, sources, conflicting information, and missing data. Its shared state and conditional routes help me control when the agent searches again and when it stops. Python helps me validate the report structure and check that each assessment has supporting evidence or is marked as not verified. I considered n8n for its visual workflow, but I chose one stack to keep the MVP small and manage the research state in Python.
+I chose LangGraph because startup screening requires me to keep track of findings, sources, conflicting information, and missing data. LangGraph keeps the sources, evidence, and assessment results available across the workflow. Python helps me check that each assessment has supporting evidence or is marked as Not verified. I considered n8n for its visual workflow, and I chose LangGraph to keep the MVP small and manage the research state in Python.
 
 ## API tests
 
@@ -30,7 +30,7 @@ I first tested these APIs separately. Later, the complete workflow generated rep
 6. **Warning signs and open questions** — Supported concerns and information the analyst still needs.
 7. **Sources** — Links connected to the findings they support.
 
-## Workflow sketch
+## Initial workflow sketch
 
 ```mermaid
 flowchart TD
@@ -97,6 +97,7 @@ I tested the extractor with two saved source snippets. It found both labels, See
 ## Local setup
 
 - Work in the `project3-vc-screening` folder with Python 3.11.
+- Add your OpenAI key to `OPENAI_API_KEY` in `.env` and set `OPENAI_MODEL=gpt-4o-mini`.
 - Copy `.env.example` to `.env` and add your Tavily key to `TAVILY_API_KEY`.
 - The Jina Reader and GDELT tests used public access without API keys.
 - Keep `.env` local. Git ignores it. The `.env.example` file contains variable names with empty values.
