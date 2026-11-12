@@ -43,6 +43,15 @@ flowchart TD
     F --> G["Write and validate the report"]
     G --> H["Save the Markdown file"]
 ```
+## Implemented workflow
+
+1. Enter the startup name and official website.
+2. Collect public information with Tavily Search, Jina Reader, and GDELT.
+3. Load the fund rules from the local investment thesis.
+4. Use GPT-4o mini to extract evidence for geography and funding stage. Python checks the quotes and applies the rules.
+5. Save a Markdown report with sources. Mark criteria that need more review as `Not verified`.
+
+If GDELT returns HTTP 429, the workflow retries once. If the retry fails, it saves the report with the available sources.
 
 ## Grounding and graph check
 
@@ -61,14 +70,14 @@ I ran `python main.py` for Kalipso. The workflow collected public
 sources and saved the first draft to `reports/kalipso-screening.md`.
 The report cites the company website and marks missing information
 as “Not verified”. Automatic assessment against the fund’s criteria
-was still pending at that poin.
+was still pending at that point.
 
 ### Geography check
 
 The geography rule returned `Meets` for Kalipso. Spain is on the fund's
 list of eligible headquarters countries. For this test, I manually
 identified Spain from the [company announcement](https://kalipso.ai/blog/weve-raised-3-2m).
-Automatic extraction was still pending at that poin.
+Automatic extraction was still pending at that point.
 
 ### Automated geography check and error handling
 
@@ -96,11 +105,32 @@ I tested the extractor with two saved source snippets. It found both labels, See
 
 ## Local setup
 
-- Work in the `project3-vc-screening` folder with Python 3.11.
-- Add your OpenAI key to `OPENAI_API_KEY` in `.env` and set `OPENAI_MODEL=gpt-4o-mini`.
-- Copy `.env.example` to `.env` and add your Tavily key to `TAVILY_API_KEY`.
-- The Jina Reader and GDELT tests used public access without API keys.
-- Keep `.env` local. Git ignores it. The `.env.example` file contains variable names with empty values.
+1. Open the project folder with Python 3.11 active.
+2. Install the dependencies.
+
+   ```bash
+   python -m pip install langgraph openai pydantic python-dotenv
+   ```
+
+3. For a new setup, copy `.env.example` to `.env`. If you already have a `.env`, use your existing file.
+
+   ```bash
+   cp .env.example .env
+   ```
+
+4. Set `TAVILY_API_KEY`, `OPENAI_API_KEY`, and `OPENAI_MODEL=gpt-4o-mini` in `.env`. Jina Reader and GDELT use public access. Keep your API keys in your local `.env`.
+
+## File map
+
+| File or folder | What it does |
+|---|---|
+| `main.py` | Starts and runs the LangGraph workflow. |
+| `tavily_search.py`, `jina_reader.py`, `gdelt_news.py` | Search the web, read pages, and look for news. |
+| `retrieval.py`, `knowledge/investment_thesis.json` | Store and look up the fund rules. |
+| `headquarters_extractor.py`, `assessment.py` | Extract evidence, check quotes, and apply the rules. |
+| `report_writer.py`, `reports/` | Build and store the Markdown reports. |
+| `.env.example` | Lists the environment variables. |
+| `gtm_future_sprints.md` | Describes the pilot and how to reach more VC teams. |
 
 ## How to run
 
