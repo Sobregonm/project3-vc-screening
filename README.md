@@ -148,5 +148,5 @@ The workflow saves a separate report for each startup:
 
 ## Presentation and demo
 
-- [View the presentation slides (PDF)](presentation/project3_slides.pdf)
+- [View the presentation slides (PDF)](presentation/SO_project3.pdf)
 - [Watch the demo recording](https://drive.google.com/file/d/1Ah5iBXRJtACox6QuJvRH1--m26oTsr_1/view?usp=drive_link)
