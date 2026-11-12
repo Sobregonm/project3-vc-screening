@@ -145,3 +145,8 @@ The workflow saves a separate report for each startup:
 
 - [Kalipso screening report](reports/kalipso-screening.md)
 - [Lawra screening report](reports/lawra-screening.md)
+
+## Presentation and demo
+
+- [View the presentation slides (PDF)](presentation/project3_slides.pdf)
+- [Watch the demo recording](https://drive.google.com/file/d/1Ah5iBXRJtACox6QuJvRH1--m26oTsr_1/view?usp=drive_link)
